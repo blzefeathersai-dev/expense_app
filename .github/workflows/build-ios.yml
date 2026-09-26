@@ -26,18 +26,23 @@ jobs:
       - name: Build Web Application
         run: npm run build
 
-      - name: Add Capacitor iOS Platform
+      - name: Add and Sync Capacitor iOS Platform
         run: |
-          if [ ! -d "ios" ]; then
-            npx cap add ios
+          npx cap add ios || true
+          npx cap sync ios
+          if [ -d "ios/App" ]; then
+            cd ios/App
+            pod install || true
           fi
-
-      - name: Sync Capacitor iOS
-        run: npx cap sync ios
 
       - name: Build iOS App (Simulator Debug Build)
         run: |
-          xcodebuild -workspace ios/App/App.xcworkspace \
+          if [ -f "ios/App/App.xcworkspace/contents.xcworkspacedata" ]; then
+            BUILD_TARGET="-workspace ios/App/App.xcworkspace"
+          else
+            BUILD_TARGET="-project ios/App/App.xcodeproj"
+          fi
+          xcodebuild $BUILD_TARGET \
             -scheme App \
             -sdk iphonesimulator \
             -configuration Debug \
