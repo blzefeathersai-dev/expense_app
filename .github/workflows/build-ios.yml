@@ -53,15 +53,31 @@ jobs:
             CODE_SIGNING_ALLOWED=NO \
             build
 
-      - name: Find and Zip iOS Simulator App
+      - name: Find and Package iOS App (.app and .ipa)
         run: |
           APP_PATH=$(find ios/build -name "App.app" -type d | head -n 1)
           echo "Found App at: $APP_PATH"
-          cd "$(dirname "$APP_PATH")"
+          APP_DIR="$(dirname "$APP_PATH")"
+          
+          # 1. Zip simulator .app
+          cd "$APP_DIR"
           zip -r "$GITHUB_WORKSPACE/ExpenseTracker-iOS-Simulator.zip" App.app
 
-      - name: Upload iOS App Artifact
+          # 2. Package real .ipa for physical iPhone sideloading
+          mkdir -p "$GITHUB_WORKSPACE/Payload"
+          cp -r App.app "$GITHUB_WORKSPACE/Payload/"
+          cd "$GITHUB_WORKSPACE"
+          zip -r ExpenseTracker.ipa Payload
+          rm -rf Payload
+
+      - name: Upload iOS Simulator Artifact (.zip)
         uses: actions/upload-artifact@v4
         with:
           name: ExpenseTracker-iOS-Simulator
           path: ExpenseTracker-iOS-Simulator.zip
+
+      - name: Upload iOS Native Package (.ipa)
+        uses: actions/upload-artifact@v4
+        with:
+          name: ExpenseTracker-iOS-IPA
+          path: ExpenseTracker.ipa
