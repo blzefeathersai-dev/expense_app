@@ -1,0 +1,6 @@
+{
+  "appId": "com.expense.app",
+  "appName": "Expense Tracker",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}

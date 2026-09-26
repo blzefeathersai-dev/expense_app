@@ -1,0 +1,64 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - heading "Expense Tracker" [level=1] [ref=e5]
+    - navigation "Main navigation" [ref=e6]:
+      - button "Show dashboard" [ref=e7] [cursor=pointer]: Dashboard
+      - button "Show expenses" [ref=e8] [cursor=pointer]: Expenses
+      - button "Manage categories" [ref=e9] [cursor=pointer]: Categories
+      - button "Past months" [ref=e10] [cursor=pointer]: Past Months
+      - button "Analytics" [ref=e11] [cursor=pointer]
+  - main [ref=e12]:
+    - generic [ref=e13]:
+      - region "Expenses summary" [ref=e14]:
+        - generic [ref=e15]:
+          - generic [ref=e16]:
+            - generic [ref=e17]: Available
+            - generic [ref=e18]: ₹5000.00
+          - generic [ref=e21]:
+            - generic [ref=e22]: Spent
+            - strong [ref=e23]: 0%
+          - button "Add Expense" [ref=e25] [cursor=pointer]
+      - table [ref=e27]:
+        - rowgroup [ref=e28]:
+          - row "Title Date Category Amount Actions" [ref=e29]:
+            - columnheader "Title" [ref=e30]
+            - columnheader "Date" [ref=e31]
+            - columnheader "Category" [ref=e32]
+            - columnheader "Amount" [ref=e33]
+            - columnheader "Actions" [ref=e34]
+        - rowgroup [ref=e35]:
+          - row "No expenses yet" [ref=e36]:
+            - cell "No expenses yet" [ref=e37]
+      - generic [ref=e38]:
+        - generic [ref=e39]: Search
+        - textbox [ref=e40]
+        - generic [ref=e41]: Filter
+        - combobox [ref=e42]:
+          - option "All" [selected]
+          - option "Miscellaneous"
+          - option "DeleteMe"
+        - generic [ref=e43]: Sort
+        - combobox [ref=e44]:
+          - option "Date" [selected]
+          - option "Price"
+  - contentinfo [ref=e45]: All data stored locally · Safe two-step deletions
+  - generic [ref=e47]:
+    - heading "Add Expense" [level=3] [ref=e48]
+    - generic [ref=e49]: Title
+    - textbox "Title" [active] [ref=e50]
+    - generic [ref=e51]: Price
+    - spinbutton "Price" [ref=e52]
+    - generic [ref=e53]: Date
+    - textbox "Date" [ref=e54]: 2025-12-13
+    - generic [ref=e55]: Category
+    - combobox "Category" [ref=e56]:
+      - option "-- choose --" [selected]
+      - option "Miscellaneous"
+      - option "DeleteMe"
+    - generic [ref=e57]:
+      - button "Save" [ref=e58] [cursor=pointer]
+      - button "Cancel" [ref=e59] [cursor=pointer]
+```
