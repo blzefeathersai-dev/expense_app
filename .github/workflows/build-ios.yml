@@ -28,7 +28,8 @@ jobs:
 
       - name: Add and Sync Capacitor iOS Platform
         run: |
-          npx cap add ios || true
+          rm -rf ios
+          npx cap add ios
           npx cap sync ios
           if [ -d "ios/App" ]; then
             cd ios/App
