@@ -53,10 +53,12 @@ jobs:
             CODE_SIGNING_ALLOWED=NO \
             build
 
-      - name: Zip iOS Simulator App
+      - name: Find and Zip iOS Simulator App
         run: |
-          cd ios/build/Build/Products/Debug-iphonesimulator
-          zip -r ../../../../ExpenseTracker-iOS-Simulator.zip App.app
+          APP_PATH=$(find ios/build -name "App.app" -type d | head -n 1)
+          echo "Found App at: $APP_PATH"
+          cd "$(dirname "$APP_PATH")"
+          zip -r "$GITHUB_WORKSPACE/ExpenseTracker-iOS-Simulator.zip" App.app
 
       - name: Upload iOS App Artifact
         uses: actions/upload-artifact@v4
